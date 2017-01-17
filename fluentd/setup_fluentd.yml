@@ -1,0 +1,94 @@
+---
+# Install fluentd (td-agent) on all servers
+- hosts: all
+  remote_user: root
+  vars:
+    # If you don't want to download the RPM file, comment out `td_agent_url`.
+    # You will then need to provide the RPM file inside the config directory.
+    td_agent_url: https://packages.treasuredata.com/2/redhat/7/x86_64
+    td_agent_rpm: td-agent-2.2.0-0.x86_64.rpm
+    td_agent_uid: 123456
+
+    # Proxy settings if required
+    proxy_env:
+      http_proxy: ""
+      https_proxy: ""
+
+  tasks:
+  # Download RPM file from the Internet
+  - name: Download tg-agent RPM file
+    get_url:
+      url: "{{ td_agent_url }}/{{ td_agent_rpm }}"
+      dest: /tmp/{{ td_agent_rpm }}
+    environment: "{{ proxy_env }}"
+    when: td_agent_url is defined
+
+  # Copy RPM file instead of downloading it
+  - name: Copy tg-agent RPM file
+    copy:
+      src: "{{ playbook_dir }}/config/{{ td_agent_rpm }}"
+      dest: /tmp/{{ td_agent_rpm }}
+    when: td_agent_url is not defined
+
+  - name: Install td-agent
+    yum:
+      name: /tmp/{{ td_agent_rpm }}
+      state: present
+
+  - name: Create td-agent group
+    group:
+      name: td-agent
+      gid: "{{ td_agent_uid }}"
+
+  - name: Create td-agent user
+    user:
+      name: td-agent
+      shell: /bin/nologin
+      home: /bin/false
+      uid: "{{ td_agent_uid }}"
+      group: td-agent
+
+  - name: Install fluent plugin for kubernetes
+    gem:
+      name: fluent-plugin-kubernetes
+      state: present
+      user_install: no
+      executable: /opt/td-agent/embedded/bin/gem
+    environment: "{{ proxy_env }}"
+
+  - name: Create td-agent config directory
+    file:
+      path: /etc/td-agent/config.d
+      state: directory
+      owner: td-agent
+      group: td-agent
+
+  - name: Create log directory for td-agent
+    file:
+      path: /var/log/td-agent/tmp
+      state: directory
+      owner: td-agent
+      group: td-agent
+
+  - name: Create sysconfig file for td-agent
+    copy:
+      src: "{{ playbook_dir }}/config/sysconfig_tg-agent"
+      dest: /etc/sysconfig/td-agent
+
+  - name: Include config.d files
+    blockinfile:
+      dest: /etc/td-agent/td-agent.conf
+      insertbefore: BOF
+      state: present
+      block: "@include config.d/*.conf"
+
+  - name: Add kubernetes.conf
+    copy:
+      src: "{{ playbook_dir }}/config/td-agent_kubernetes.conf"
+      dest: /etc/td-agent/config.d/kubernetes.conf
+
+  - name: Enable td-agent
+    service:
+      name: td-agent
+      state: started
+      enabled: yes
