@@ -9,6 +9,13 @@
     td_agent_rpm: td-agent-2.2.0-0.x86_64.rpm
     td_agent_uid: 123456
 
+    # Plugins for fluentd
+    fluent_plugins:
+      - name: fluent-plugin-concat
+        version: 1.0.0
+      - name: fluent-plugin-kubernetes
+        version: 0.3.1
+
     # Proxy settings if required
     proxy_env:
       http_proxy: ""
@@ -26,7 +33,7 @@
   # Copy RPM file instead of downloading it
   - name: Copy tg-agent RPM file
     copy:
-      src: "{{ playbook_dir }}/config/{{ td_agent_rpm }}"
+      src: "{{ td_agent_rpm }}"
       dest: /tmp/{{ td_agent_rpm }}
     when: td_agent_url is not defined
 
@@ -34,6 +41,8 @@
     yum:
       name: /tmp/{{ td_agent_rpm }}
       state: present
+    notify:
+      - restart td-agent
 
   - name: Create td-agent group
     group:
@@ -48,13 +57,49 @@
       uid: "{{ td_agent_uid }}"
       group: td-agent
 
-  - name: Install fluent plugin for kubernetes
+  - name: Install plugin dependancies
+    yum:
+      name: "{{ item }}"
+      state: present
+    with_items:
+      - gcc
+
+  # NOTE: Operators on version (e.g, ">", "<", "!=") currently not supported by gem module
+  # - name: Uninstall other versions of fluentd plugins
+  #   gem:
+  #     name: "{{ item.name }}"
+  #     version: "!={{ item.version }}"
+  #     state: absent
+  #     executable: /opt/td-agent/embedded/bin/gem
+  #   with_items: "{{ fluent_plugins }}"
+  #   notify:
+  #     - restart td-agent
+
+  - name: Uninstall other versions of fluentd plugins
+    command: >
+      /opt/td-agent/embedded/bin/gem uninstall {{ item.name }}
+      --version '!={{ item.version }}' --all
+    with_items: "{{ fluent_plugins }}"
+    register: command_result
+    failed_when:
+      - "'is not installed' not in command_result.stderr"
+      - command_result.rc != 0
+    changed_when:
+      - "'Successfully uninstalled' in command_result.stdout"
+    notify:
+      - restart td-agent
+
+  - name: Install fluentd plugins
     gem:
-      name: fluent-plugin-kubernetes
+      name: "{{ item.name }}"
+      version: "{{ item.version }}"
       state: present
       user_install: no
       executable: /opt/td-agent/embedded/bin/gem
     environment: "{{ proxy_env }}"
+    with_items: "{{ fluent_plugins }}"
+    notify:
+      - restart td-agent
 
   - name: Create td-agent config directory
     file:
@@ -74,21 +119,38 @@
     copy:
       src: "{{ playbook_dir }}/config/sysconfig_tg-agent"
       dest: /etc/sysconfig/td-agent
+    notify:
+      - restart td-agent
 
   - name: Include config.d files
-    blockinfile:
+    lineinfile:
       dest: /etc/td-agent/td-agent.conf
       insertbefore: BOF
       state: present
-      block: "@include config.d/*.conf"
+      line: "@include config.d/*.conf"
+    notify:
+      - restart td-agent
 
-  - name: Add kubernetes.conf
+  - name: Add fluentd config files
     copy:
-      src: "{{ playbook_dir }}/config/td-agent_kubernetes.conf"
-      dest: /etc/td-agent/config.d/kubernetes.conf
+      src: "{{ item.src }}"
+      dest: /etc/td-agent/config.d/{{ item.dest }}
+    with_items:
+      - src: "{{ playbook_dir }}/config/td-agent_kubernetes.conf"
+        dest: kubernetes.conf
+      - src: "{{ playbook_dir }}/config/td-agent_django.conf"
+        dest: django.conf
+    notify:
+      - restart td-agent
 
   - name: Enable td-agent
     service:
       name: td-agent
       state: started
       enabled: yes
+
+  handlers:
+    - name: restart td-agent
+      service:
+        name: td-agent
+        state: restarted
