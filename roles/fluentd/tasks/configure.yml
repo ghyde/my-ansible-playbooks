@@ -1,0 +1,41 @@
+---
+# Configure fluentd (td-agent) on all servers
+- name: Create td-agent config directory
+  file:
+    path: /etc/td-agent/config.d
+    state: directory
+    owner: td-agent
+    group: td-agent
+
+- name: Create log directory for td-agent
+  file:
+    path: /var/log/td-agent/tmp
+    state: directory
+    owner: td-agent
+    group: td-agent
+
+- name: Create sysconfig file for td-agent
+  copy:
+    src: td-agent
+    dest: /etc/sysconfig/td-agent
+  notify:
+    - restart td-agent
+
+- name: Include config.d files
+  lineinfile:
+    dest: /etc/td-agent/td-agent.conf
+    insertbefore: BOF
+    state: present
+    line: "@include config.d/*.conf"
+  notify:
+    - restart td-agent
+
+- name: Add fluentd config files
+  copy:
+    src: "{{ item }}"
+    dest: /etc/td-agent/config.d/{{ item }}
+  with_items:
+    - kubernetes.conf
+    - django.conf
+  notify:
+    - restart td-agent

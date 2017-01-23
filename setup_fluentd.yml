@@ -1,0 +1,7 @@
+---
+# Installs and configures Fluentd on a server running Openshift
+- hosts: all
+  remote_user: root
+
+  roles:
+    - fluentd
