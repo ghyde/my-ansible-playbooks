@@ -21,19 +21,6 @@
   notify:
     - restart td-agent
 
-- name: Create td-agent group
-  group:
-    name: td-agent
-    gid: "{{ td_agent_uid }}"
-
-- name: Create td-agent user
-  user:
-    name: td-agent
-    shell: /bin/nologin
-    home: /bin/false
-    uid: "{{ td_agent_uid }}"
-    group: td-agent
-
 - name: Install plugin dependancies
   yum:
     name: "{{ item }}"
