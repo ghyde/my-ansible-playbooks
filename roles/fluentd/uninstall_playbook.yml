@@ -1,0 +1,7 @@
+---
+# Uninstall Fluentd (td-agent) from servers
+- hosts: all
+  remote_user: root
+
+  tasks:
+  - include: tasks/uninstall.yml

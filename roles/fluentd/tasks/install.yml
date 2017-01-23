@@ -1,6 +1,4 @@
 ---
-# Install fluentd (td-agent) on all servers
-
 # Download RPM file from the Internet
 - name: Download td-agent RPM file
   get_url:

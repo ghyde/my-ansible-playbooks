@@ -1,5 +1,4 @@
 ---
-# Configure fluentd (td-agent) on all servers
 - name: Create td-agent config directory
   file:
     path: /etc/td-agent/config.d

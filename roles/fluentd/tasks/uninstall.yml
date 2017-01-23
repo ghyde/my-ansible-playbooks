@@ -1,0 +1,28 @@
+---
+- include_vars: ../defaults/main.yml
+
+- name: Uninstall td-agent
+  yum:
+    name: td-agent
+    state: absent
+
+- name: Remove all files
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - /etc/sysconfig/td-agent
+    - /etc/td-agent
+    - /opt/td-agent
+    - /var/log/td-agent
+    - "{{ td_agent_rpm_path }}/{{ td_agent_rpm }}"
+
+- name: Delete td-agent user
+  user:
+    name: td-agent
+    state: absent
+
+- name: Delete td-agent group
+  group:
+    name: td-agent
+    state: absent
