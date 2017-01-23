@@ -5,16 +5,16 @@
 - name: Download td-agent RPM file
   get_url:
     url: "{{ td_agent_url }}/{{ td_agent_rpm }}"
-    dest: /tmp/{{ td_agent_rpm }}
+    dest: "{{ td_agent_rpm_path }}/{{ td_agent_rpm }}"
   environment: "{{ proxy_env }}"
-  when: td_agent_url is defined
+  when: download_td_agent_rpm
 
 # Copy RPM file instead of downloading it
 - name: Copy td-agent RPM file
   copy:
     src: "{{ td_agent_rpm }}"
-    dest: /tmp/{{ td_agent_rpm }}
-  when: td_agent_url is not defined
+    dest: "{{ td_agent_rpm_path }}/{{ td_agent_rpm }}"
+  when: not download_td_agent_rpm
 
 - name: Install td-agent
   yum:

@@ -1,5 +1,5 @@
-# If you don't want to download the RPM file, comment out `td_agent_url`.
-# You will then need to provide the RPM file inside the config directory.
+download_td_agent_rpm: yes
+td_agent_rpm_path: /tmp
 td_agent_url: https://packages.treasuredata.com/2/redhat/7/x86_64
 td_agent_rpm: td-agent-2.2.0-0.x86_64.rpm
 td_agent_uid: 123456
