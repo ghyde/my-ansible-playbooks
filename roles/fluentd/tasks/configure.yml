@@ -38,3 +38,9 @@
     - django.conf
   notify:
     - restart td-agent
+
+- name: Enable td-agent
+  service:
+    name: td-agent
+    state: started
+    enabled: yes

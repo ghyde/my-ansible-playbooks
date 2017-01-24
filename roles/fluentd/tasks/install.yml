@@ -63,9 +63,3 @@
   with_items: "{{ fluentd_plugins }}"
   notify:
     - restart td-agent
-
-- name: Enable td-agent
-  service:
-    name: td-agent
-    state: started
-    enabled: yes
