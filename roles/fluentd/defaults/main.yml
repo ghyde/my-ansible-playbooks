@@ -10,9 +10,7 @@ fluent_plugins:
   - name: fluent-plugin-kubernetes
     version: 0.3.1
 
-plugin_dependancies:
-  # Required by fluent-plugin-concat
-  - gcc
+plugin_dependancies: []
 
 # Proxy settings if required
 proxy_env:
