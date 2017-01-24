@@ -25,7 +25,7 @@
   yum:
     name: "{{ item }}"
     state: present
-  with_items: "{{ plugin_dependancies }}"
+  with_items: "{{ fluentd_plugin_dependancies }}"
 
 # NOTE: Operators on version (e.g, ">", "<", "!=") currently not supported by gem module
 # - name: Uninstall other versions of fluentd plugins
@@ -34,7 +34,7 @@
 #     version: "!={{ item.version }}"
 #     state: absent
 #     executable: /opt/td-agent/embedded/bin/gem
-#   with_items: "{{ fluent_plugins }}"
+#   with_items: "{{ fluentd_plugins }}"
 #   notify:
 #     - restart td-agent
 
@@ -42,7 +42,7 @@
   command: >
     /opt/td-agent/embedded/bin/gem uninstall {{ item.name }}
     --version '!={{ item.version }}' --all
-  with_items: "{{ fluent_plugins }}"
+  with_items: "{{ fluentd_plugins }}"
   register: command_result
   failed_when:
     - "'is not installed' not in command_result.stderr"
@@ -60,7 +60,7 @@
     user_install: no
     executable: /opt/td-agent/embedded/bin/gem
   environment: "{{ proxy_env }}"
-  with_items: "{{ fluent_plugins }}"
+  with_items: "{{ fluentd_plugins }}"
   notify:
     - restart td-agent
 
