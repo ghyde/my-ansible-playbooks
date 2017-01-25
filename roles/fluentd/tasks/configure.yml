@@ -44,3 +44,6 @@
     name: td-agent
     state: started
     enabled: yes
+  register: td_agent_started
+  notify:
+    - check td-agent running

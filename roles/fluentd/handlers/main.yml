@@ -3,3 +3,9 @@
   service:
     name: td-agent
     state: restarted
+  notify:
+    - check td-agent running
+
+- name: check td-agent running
+  command: bash -c "sleep 5; systemctl status -l td-agent"
+  changed_when: false
