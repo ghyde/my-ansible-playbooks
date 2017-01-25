@@ -15,8 +15,6 @@ fluentd_plugin_dependancies: []
 
 fluentd_config_files:
   - kubernetes.conf
-  - django.conf
-  - jboss.conf
 
 # Proxy settings if required
 proxy_env:
