@@ -33,9 +33,7 @@
   copy:
     src: "{{ item }}"
     dest: /etc/td-agent/config.d/{{ item }}
-  with_items:
-    - kubernetes.conf
-    - django.conf
+  with_items: "{{ fluentd_config_files }}"
   notify:
     - restart td-agent
 

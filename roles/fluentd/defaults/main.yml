@@ -13,6 +13,11 @@ fluentd_plugins:
 # yum packages required by fluentd plugins
 fluentd_plugin_dependancies: []
 
+fluentd_config_files:
+  - kubernetes.conf
+  - django.conf
+  - jboss.conf
+
 # Proxy settings if required
 proxy_env:
   http_proxy: ""
