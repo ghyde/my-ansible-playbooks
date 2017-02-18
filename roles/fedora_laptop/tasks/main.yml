@@ -1,0 +1,6 @@
+---
+# tasks file for fedora_laptop
+- include: fedora.yml
+- include: third_party_packages.yml
+- include: atom.yml
+- include: vagrant.yml

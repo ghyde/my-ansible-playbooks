@@ -1,0 +1,43 @@
+---
+- block:
+  - name: download Atom rpm file
+    get_url:
+      url: https://atom.io/download/rpm
+      dest: /tmp/atom.x86_64.rpm
+
+  - name: install Atom text editor
+    dnf:
+      name: /tmp/atom.x86_64.rpm
+      state: present
+
+#  - name: delete rpm file
+#    file:
+#      path: /tmp/atom.x86_64.rpm
+#      state: absent
+
+  - name: install package dependencies
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ atom_package_dependencies }}"
+  become: yes
+  become_user: root
+
+- name: gather installed Atom packages
+  command: apm ls
+  register: installed_atom_packages
+  changed_when: false
+
+- name: install Atom packages
+  command: apm install {{ item }}
+  with_items: "{{ atom_packages }}"
+  when: item not in installed_atom_packages.stdout
+
+- name: copy Atom config files
+  copy:
+    src: atom/{{ item }}
+    dest: "{{ ansible_env.HOME }}/.atom/"
+    backup: yes
+  with_items:
+  - config.cson
+  - keymap.cson

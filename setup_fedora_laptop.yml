@@ -1,0 +1,7 @@
+---
+# Installs and configures Fluentd on a server running Openshift
+- hosts: localhost
+  connection: local
+
+  roles:
+  - fedora_laptop

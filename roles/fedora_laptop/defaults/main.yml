@@ -1,0 +1,43 @@
+---
+# defaults file for fedora_laptop
+
+# Fedora variables
+fedora_installed_packages:
+- vim
+- vim-X11
+
+# Atom variables
+atom_packages:
+- activate-power-mode
+- autocomplete-emojis
+- autocomplete-paths
+- auto-detect-indentation
+- color-picker
+- fizzy
+- git-plus
+- git-time-machine
+- keybinding-cheatsheet
+- language-ansible
+- language-latex
+- latex
+- latexer
+- linter
+- linter-ansible-linting
+- linter-pep8
+- linter-pycodestyle
+- markdown-pdf
+- markdown-preview-plus
+- markdown-scroll-sync
+- markdown-writer
+- merge-conflicts
+- minimap
+- monokai
+- script
+- seti-icons
+- seti-syntax
+- seti-ui
+- unity-ui
+- vim-mode
+
+atom_package_dependencies:
+- python-pep8
