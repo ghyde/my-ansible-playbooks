@@ -1,16 +1,30 @@
 ---
 # defaults file for fedora_laptop
 
-# Fedora variables
+####################
+# Fedora variables #
+####################
 fedora_installed_packages:
+# Ansible
+- python2-dnf
+- libselinux-python
+- virt-manager
+# Other packages
+- bash-completion
+- python-ipython
+- python-pudb
 - vim
 - vim-X11
 
-# Atom variables
+##################
+# Atom variables #
+##################
 atom_packages:
 - activate-power-mode
-- autocomplete-emojis
+- autocomplete-ansible
+#- autocomplete-emojis
 - autocomplete-paths
+- autocomplete-python
 - auto-detect-indentation
 - color-picker
 - fizzy
@@ -18,12 +32,12 @@ atom_packages:
 - git-time-machine
 - keybinding-cheatsheet
 - language-ansible
-- language-latex
-- latex
-- latexer
+#- language-latex
+#- latex
+#- latexer
 - linter
-- linter-ansible-linting
-- linter-pep8
+#- linter-ansible-linting
+- linter-ansible-syntax
 - linter-pycodestyle
 - markdown-pdf
 - markdown-preview-plus
@@ -40,4 +54,39 @@ atom_packages:
 - vim-mode
 
 atom_package_dependencies:
-- python-pep8
+#- ansible-lint
+- python2-pycodestyle
+
+#################
+# PIP variables #
+#################
+pip_packages:
+- thefuck
+
+pip_package_dependencies:
+- python-devel
+- redhat-rpm-config
+
+#####################
+# Vagrant variables #
+#####################
+vagrant_plugins:
+- landrush
+- ruby-libvirt
+- vagrant-hostmanager
+- vagrant-libvirt
+- vagrant-registration
+- vagrant-service-manager
+- vagrant-sshfs
+
+vagrant_plugin_dependencies:
+- dnsmasq
+- gcc
+- gcc-c++
+- libvirt
+- libvirt-devel
+- qemu
+- ruby-devel
+- zlib-devel
+
+# vagrant_boxes:
