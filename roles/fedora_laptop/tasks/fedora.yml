@@ -14,3 +14,28 @@
 
   become: yes
   become_user: root
+
+# Gnome 3 configs
+- block:
+  # UI settings
+  - name: enable minimize and maximize buttons
+    command: gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
+
+  - name: make workspaces static
+    command: gsettings set org.gnome.shell.overrides dynamic-workspaces false
+
+  - name: set number of workspaces to four
+    command: gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
+
+  # Touchpad settings
+  - name: enable two-finger scrolling
+    command: gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+
+  - name: use natural scrolling
+    command: gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+
+  - name: disable tap-to-click
+    command: gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click false
+
+  - name: emulate mouse buttons via number of fingers
+    command: gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'

@@ -12,6 +12,7 @@ fedora_installed_packages:
 
 # Other packages
 - bash-completion
+- gnome-tweak-tool
 - libvirt
 - origin-clients
 - python-ipython
