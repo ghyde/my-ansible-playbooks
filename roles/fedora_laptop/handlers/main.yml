@@ -1,2 +1,6 @@
 ---
 # handlers file for fedora_laptop
+- name: restart libvirtd
+  service:
+    name: libvirtd
+    state: restarted

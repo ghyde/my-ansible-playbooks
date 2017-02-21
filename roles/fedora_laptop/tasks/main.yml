@@ -4,4 +4,5 @@
 - include: third_party_packages.yml
 - include: atom.yml
 - include: docker.yml
+- include: libvirt.yml
 - include: vagrant.yml

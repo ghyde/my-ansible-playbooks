@@ -24,12 +24,5 @@
   with_items: "{{ vagrant_plugins }}"
   when: item not in installed_vagrant_plugins.stdout
 
-- name: allow user libvirt management permissions
-  template:
-    src: vagrant/vagrant.pkla.j2
-    dest: /etc/polkit-1/localauthority/50-local.d/vagrant.pkla
-  become: yes
-  become_user: root
-
 # TODO
 #- name: Import boxes

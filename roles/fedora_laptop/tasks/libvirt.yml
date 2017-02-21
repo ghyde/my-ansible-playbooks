@@ -1,0 +1,67 @@
+---
+- block:
+  - name: install packages
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - libvirt
+    - libvirt-python
+    - python-lxml
+
+  - name: allow user libvirt management permissions
+    template:
+      src: libvirt/libvirt.pkla.j2
+      dest: /etc/polkit-1/localauthority/50-local.d/libvirt.pkla
+
+  - name: start libvirtd
+    service:
+      name: libvirtd
+      state: started
+      enabled: yes
+
+  - name: get available pools
+    virt_pool:
+      command: list_pools
+    register: command_result
+  - set_fact:
+      libvirt_defined_pools: "{{ command_result.list_pools }}"
+  become: yes
+  become_user: root
+
+# Create new pools. Does not modify existing pools.
+- block:
+  - name: add execute flag to user home directory
+    file:
+      path: '{{ ansible_user_dir }}'
+      state: directory
+      mode: "a+x"
+    when: ansible_user_dir in libvirt_pool_dir
+
+  - name: backup pool config if it exists
+    copy:
+      src: /etc/libvirt/storage/{{ libvirt_pool_name }}.xml
+      dest: /etc/libvirt/storage/{{ libvirt_pool_name }}.xml.{{ ansible_date_time.epoch }}
+      remote_src: yes
+    ignore_errors: yes
+
+  - name: define storage pool
+    virt_pool:
+      name: '{{ libvirt_pool_name }}'
+      state: present
+      xml: '{{ lookup("template", "libvirt/pool.xml.j2") }}'
+
+  - name: build storage pool
+    virt_pool:
+      command: build
+      name: '{{ libvirt_pool_name }}'
+
+  - name: start storage pool
+    virt_pool:
+      name: '{{ libvirt_pool_name }}'
+      state: active
+      autostart: yes
+
+  become: yes
+  become_user: root
+  when: libvirt_pool_name not in libvirt_defined_pools

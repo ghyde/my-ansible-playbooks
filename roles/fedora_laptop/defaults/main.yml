@@ -76,7 +76,6 @@ docker_images:
 - kalilinux/kali-linux-docker:Rolling
 - mongo:3.4
 
-
 #################
 # PIP variables #
 #################
@@ -86,6 +85,12 @@ pip_packages:
 pip_package_dependencies:
 - python-devel
 - redhat-rpm-config
+
+#####################
+# libvirt variables #
+#####################
+libvirt_pool_name: default
+libvirt_pool_dir: "{{ ansible_user_dir }}/VirtualMachines"
 
 #####################
 # Vagrant variables #
