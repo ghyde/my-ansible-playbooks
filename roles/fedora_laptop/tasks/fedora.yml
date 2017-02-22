@@ -22,14 +22,54 @@
     command: gsettings set org.gnome.desktop.wm.preferences num-workspaces 4
 
   # Touchpad settings
-  - name: enable two-finger scrolling
-    command: gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+  - name: modify touchpad settings
+    command: gsettings set org.gnome.desktop.peripherals.touchpad {{ item.key }} {{ item.value }}
+    with_items:
+    # Enable two-finger scrolling
+    - key: 'two-finger-scrolling-enabled'
+      value: 'true'
+    # Enable natural scrolling
+    - key: 'natural-scroll'
+      value: 'true'
+    # Disable tap-to-click on touchpad
+    - key: 'tap-to-click'
+      value: 'false'
+    # Use finger count to determine click type
+    # Ex: one finger => left-click
+    #     two fingers => right-click
+    #     three fingers => middle-click
+    - key: 'click-method'
+      value: 'fingers'
 
-  - name: use natural scrolling
-    command: gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+  - name: create shortcut for lanching terminal
+    command: >
+      gsettings set
+      org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/
+      {{ item.key }} "{{ item.value }}"
+    with_items:
+    - key: 'name'
+      value: 'Launch terminal'
+    - key: 'command'
+      value: '/usr/bin/gnome-terminal'
+    - key: 'binding'
+      value: '<Primary><Alt><Meta>t'
 
-  - name: disable tap-to-click
-    command: gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click false
+  - name: create shortcut for lanching browser
+    command: >
+      gsettings set
+      org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/
+      {{ item.key }} "{{ item.value }}"
+    with_items:
+    - key: 'name'
+      value: 'Launch browser'
+    - key: 'command'
+      value: '/usr/bin/google-chrome'
+    - key: 'binding'
+      value: '<Primary><Alt><Meta>b'
 
-  - name: emulate mouse buttons via number of fingers
-    command: gsettings set org.gnome.desktop.peripherals.touchpad click-method 'fingers'
+  - name: enable custom shortcuts
+    command: >
+      gsettings set org.gnome.settings-daemon.plugins.media-keys
+      custom-keybindings
+      "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',
+      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
