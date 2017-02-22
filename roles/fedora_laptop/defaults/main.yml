@@ -5,18 +5,13 @@
 # Fedora variables #
 ####################
 fedora_installed_packages:
-# Ansible
-- python2-dnf
-- libselinux-python
-- virt-manager
-
-# Other packages
 - bash-completion
 - gnome-tweak-tool
 - libvirt
 - origin-clients
 - python-ipython
 - python-pudb
+- virt-manager
 - vim
 - vim-X11
 
