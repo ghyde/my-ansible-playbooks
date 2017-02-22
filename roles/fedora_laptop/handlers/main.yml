@@ -4,3 +4,8 @@
   service:
     name: libvirtd
     state: restarted
+
+- name: restart dnsmasq
+  service:
+    name: dnsmasq
+    state: restarted

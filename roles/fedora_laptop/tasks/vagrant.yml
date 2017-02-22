@@ -26,3 +26,32 @@
 
 # TODO
 #- name: Import boxes
+
+# Configure dnsmasq to work with landrush
+- block:
+  - name: install dnsmasq
+    dnf:
+      name: dnsmasq
+      state: present
+
+  - name: configure dnsmasq
+    lineinfile:
+      dest: /etc/dnsmasq.conf
+      line: "{{ item }}"
+      insertafter: EOF
+    with_items:
+      - "conf-dir=/etc/dnsmasq.d,.rpmnew,.rpmsave,.rpmorig"
+      - "listen-address=127.0.0.1"
+      - "interface={{ dnsmasq_listen_interface }}"
+      - "bind-interfaces"
+    notify: restart dnsmasq
+
+  - name: start dnsmasq
+    service:
+      name: dnsmasq
+      state: started
+      enabled: yes
+
+  become: yes
+  become_user: root
+  when: '"landrush" in vagrant_plugins'

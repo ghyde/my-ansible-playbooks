@@ -95,6 +95,8 @@ libvirt_pool_dir: "{{ ansible_user_dir }}/VirtualMachines"
 #####################
 # Vagrant variables #
 #####################
+dnsmasq_listen_interface: wlp4s0
+
 vagrant_plugins:
 - landrush
 - ruby-libvirt
