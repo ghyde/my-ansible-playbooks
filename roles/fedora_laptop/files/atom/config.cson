@@ -1,6 +1,8 @@
 "*":
   "activate-power-mode":
     autoToggle: false
+    comboMode:
+      enabled: false
   "autocomplete-plus": {}
   core:
     disabledPackages: [
