@@ -6,3 +6,4 @@
 - include: docker.yml
 - include: libvirt.yml
 - include: vagrant.yml
+- include: terminix.yml

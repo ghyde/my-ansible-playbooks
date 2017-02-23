@@ -50,7 +50,7 @@
     - key: 'name'
       value: 'Launch terminal'
     - key: 'command'
-      value: '/usr/bin/gnome-terminal'
+      value: '/usr/bin/terminix'
     - key: 'binding'
       value: '<Primary><Alt><Meta>t'
 

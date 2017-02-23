@@ -1,0 +1,54 @@
+---
+# Install Terminix
+- block:
+    - name: add Terminix repo
+      get_url:
+        url: https://copr.fedorainfracloud.org/coprs/heikoada/terminix/repo/fedora-25/heikoada-terminix-fedora-25.repo
+        dest: /etc/yum.repos.d/heikoada-terminix-fedora-25.repo
+
+    - name: install Terminix
+      dnf:
+        name: terminix
+        state: present
+  become: yes
+  become_user: root
+
+# Configure Terminix
+- block:
+  - name: backup current Terminix preferences
+    shell: dconf dump /com/gexperts/Terminix/ > /tmp/terminix_preferences.{{ ansible_date_time.epoch }}
+
+  - name: load Terminix preferences
+    shell: echo -e "{{ lookup('file', 'terminix/preferences') }}" | dconf load /com/gexperts/Terminix/
+
+# Install gnome-shell extension
+# Ref: http://bernaerts.dyndns.org/linux/76-gnome/283-gnome-shell-install-extension-command-line-script
+- name: check if Terminix Dropdown extension is installed
+  stat:
+    path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TerminixDropdown@ivkuzev@gmail.com"
+  register: terminix_dropdown_extension
+
+- block:
+  - name: download gnome-shell-TerminixDropdown
+    unarchive:
+      src: https://github.com/ivoarch/gnome-shell-TerminixDropdown/archive/master.zip
+      dest: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
+      remote_src: True
+
+  - name: rename output directory
+    command: mv gnome-shell-TerminixDropdown-master TerminixDropdown@ivkuzev@gmail.com
+    args:
+      chdir: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
+      creates: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TerminixDropdown@ivkuzev@gmail.com"
+
+  - name: get enabled extensions
+    command: gsettings get org.gnome.shell enabled-extensions
+    register: enabled_extensions
+
+  - debug:
+      msg: "Current enabled extensions: {{ enabled_extensions.stdout }}"
+
+  - name: enable TerminixDropdown extensions
+    command: gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'TerminixDropdown@ivkuzev@gmail.com']"
+    when: "'TerminixDropdown@ivkuzev@gmail.com' not in enabled_extensions.stdout"
+  when: not terminix_dropdown_extension.stat.exists

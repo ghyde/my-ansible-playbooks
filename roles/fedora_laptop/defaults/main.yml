@@ -11,6 +11,7 @@ fedora_installed_packages:
 - origin-clients
 - python-ipython
 - python-pudb
+- unzip
 - virt-manager
 - vim
 - vim-X11
