@@ -41,35 +41,8 @@
     - key: 'click-method'
       value: 'fingers'
 
-  - name: create shortcut for lanching terminal
-    command: >
-      gsettings set
-      org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/
-      {{ item.key }} "{{ item.value }}"
-    with_items:
-    - key: 'name'
-      value: 'Launch terminal'
-    - key: 'command'
-      value: '/usr/bin/terminix'
-    - key: 'binding'
-      value: '<Primary><Alt><Meta>t'
+  - name: backup current custom shortcuts
+    shell: dconf dump /org/gnome/settings-daemon/plugins/media-keys/ > /tmp/media-keys.{{ ansible_date_time.epoch }}
 
-  - name: create shortcut for lanching browser
-    command: >
-      gsettings set
-      org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/
-      {{ item.key }} "{{ item.value }}"
-    with_items:
-    - key: 'name'
-      value: 'Launch browser'
-    - key: 'command'
-      value: '/usr/bin/google-chrome'
-    - key: 'binding'
-      value: '<Primary><Alt><Meta>b'
-
-  - name: enable custom shortcuts
-    command: >
-      gsettings set org.gnome.settings-daemon.plugins.media-keys
-      custom-keybindings
-      "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/',
-      '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']"
+  - name: load custom shortcuts
+    shell: echo -e "{{ lookup('file', 'gnome3/media-keys') }}" | dconf load /org/gnome/settings-daemon/plugins/media-keys/

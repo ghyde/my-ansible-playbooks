@@ -1,0 +1,12 @@
+[/]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/', '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/']
+
+[custom-keybindings/custom1]
+binding='<Primary><Alt><Meta>b'
+command='/usr/bin/google-chrome'
+name='Launch browser'
+
+[custom-keybindings/custom0]
+binding='<Primary><Alt><Meta>t'
+command='/usr/bin/terminix'
+name='Launch terminal'
