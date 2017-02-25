@@ -5,5 +5,12 @@
       name: "{{ item }}"
       state: present
     with_items: "{{ fedora_installed_packages }}"
+
+  - name: enable libvirtd
+    service:
+      name: libvirtd
+      state: started
+      enabled: yes
+
   become: yes
   become_user: root

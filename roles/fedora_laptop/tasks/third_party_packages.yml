@@ -1,7 +1,7 @@
 ---
 - block:
   # Install Chrome
-  - name: copy Chrome repo file
+  - name: add Chrome repo
     copy:
       src: repos/google-chrome.repo
       dest: /etc/yum.repos.d/
@@ -15,7 +15,7 @@
     rpm_key:
       key: https://s3.amazonaws.com/download.draios.com/DRAIOS-GPG-KEY.public
       state: present
-  - name: copy sysdig repo file
+  - name: add sysdig repo
     get_url:
       url: http://download.draios.com/stable/rpm/draios.repo
       dest: /etc/yum.repos.d/draios.repo
@@ -28,7 +28,7 @@
     - sysdig
 
   # Install Spotify
-  - name: copy fedora-spotify repo file
+  - name: add fedora-spotify repo
     get_url:
       url: http://negativo17.org/repos/fedora-spotify.repo
       dest: /etc/yum.repos.d/fedora-spotify.repo
@@ -37,14 +37,19 @@
       name: spotify-client
       state: present
 
+  # Install third party rpms
+  - name: install third party rpms
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ fedora_third_party_rpms }}"
+
   # Install PIP package dependencies
   - name: install PIP package dependencies
     dnf:
       name: "{{ item }}"
       state: present
     with_items: "{{ pip_package_dependencies }}"
-    become: yes
-    become_user: root
 
   # Install PIP packages
   - name: install PIP packages

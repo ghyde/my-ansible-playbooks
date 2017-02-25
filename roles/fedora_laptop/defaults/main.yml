@@ -9,12 +9,19 @@ fedora_installed_packages:
 - python2-dnf
 - libselinux-python
 - virt-manager
+
 # Other packages
 - bash-completion
+- libvirt
+- origin-clients
 - python-ipython
 - python-pudb
 - vim
 - vim-X11
+
+fedora_third_party_rpms:
+- https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/2.4.0/rocketchat-2.4.0.rpm
+- https://downloads.slack-edge.com/linux_releases/slack-2.4.2-0.1.fc21.x86_64.rpm
 
 ##################
 # Atom variables #
