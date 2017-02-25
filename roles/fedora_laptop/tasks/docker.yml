@@ -1,0 +1,47 @@
+---
+- block:
+  - name: import Docker GPG key
+    rpm_key:
+      key: https://yum.dockerproject.org/gpg
+      state: present
+
+  - name: add Docker repo
+    get_url:
+      url: https://docs.docker.com/engine/installation/linux/repo_files/fedora/docker.repo
+      dest: /etc/yum.repos.d/docker.repo
+
+  - name: install Docker
+    dnf:
+      name: docker-engine
+      state: present
+
+  - name: create docker group
+    group:
+      name: docker
+      state: present
+
+  - name: add user to docker group
+    user:
+      name: "{{ ansible_user }}"
+      groups: docker
+      append: yes
+
+  - name: start Docker daemon
+    service:
+      name: docker
+      state: started
+      enabled: yes
+
+  - name: get installed Docker images
+    shell: bash -c "docker images | grep -v REPOSITORY | awk '{print \$1\":\"\$2}'"
+    register: installed_docker_images
+    changed_when: false
+    when: docker_pull_images
+
+  - name: pull Docker images
+    command: docker pull {{ item }}
+    with_items: "{{ docker_images }}"
+    when: docker_pull_images and item not in installed_docker_images.stdout
+
+  become: yes
+  become_user: root

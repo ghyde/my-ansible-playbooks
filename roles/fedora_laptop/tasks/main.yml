@@ -3,4 +3,5 @@
 - include: fedora.yml
 - include: third_party_packages.yml
 - include: atom.yml
+- include: docker.yml
 - include: vagrant.yml

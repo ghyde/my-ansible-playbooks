@@ -65,6 +65,18 @@ atom_package_dependencies:
 - python2-pycodestyle
 
 #################
+# Docker images #
+#################
+docker_pull_images: yes
+docker_images:
+- alpine:3.5
+- centos:7
+- fedora:25
+- kalilinux/kali-linux-docker:Rolling
+- mongo:3.4
+
+
+#################
 # PIP variables #
 #################
 pip_packages:
