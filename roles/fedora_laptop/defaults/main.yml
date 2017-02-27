@@ -7,10 +7,13 @@
 fedora_installed_packages:
 - bash-completion
 - gnome-tweak-tool
+- irssi
 - libvirt
 - origin-clients
 - python-ipython
 - python-pudb
+- screen
+- tmux
 - unzip
 - virt-manager
 - vim
