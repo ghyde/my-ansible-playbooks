@@ -1,28 +1,31 @@
 ---
-- name: install Vagrant
-  dnf:
-    name: vagrant
-    state: present
-  become: yes
-  become_user: root
+- block:
+  - name: install Vagrant
+    dnf:
+      name: vagrant
+      state: present
+    become: yes
+    become_user: root
 
-- name: gather installed Vagrent plugins
-  command: vagrant plugin list
-  register: installed_vagrant_plugins
-  changed_when: false
+  - name: gather installed Vagrent plugins
+    command: vagrant plugin list
+    register: installed_vagrant_plugins
+    changed_when: false
 
-- name: install Vagrant plugin dependencies
-  dnf:
-    name: "{{ item }}"
-    state: present
-  with_items: "{{ vagrant_plugin_dependencies }}"
-  become: yes
-  become_user: root
+  - name: install Vagrant plugin dependencies
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items: "{{ vagrant_plugin_dependencies }}"
+    become: yes
+    become_user: root
 
-- name: install Vagrant plugins
-  shell: vagrant plugin install {{ item }}
-  with_items: "{{ vagrant_plugins }}"
-  when: item not in installed_vagrant_plugins.stdout
+  - name: install Vagrant plugins
+    shell: vagrant plugin install {{ item }}
+    with_items: "{{ vagrant_plugins }}"
+    when: item not in installed_vagrant_plugins.stdout
+  tags:
+  - vagrant
 
 # TODO
 #- name: Import boxes
@@ -51,7 +54,8 @@
       name: dnsmasq
       state: started
       enabled: yes
-
   become: yes
   become_user: root
   when: '"landrush" in vagrant_plugins'
+  tags:
+  - vagrant

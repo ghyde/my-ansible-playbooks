@@ -42,6 +42,7 @@
     command: docker pull {{ item }}
     with_items: "{{ docker_images }}"
     when: docker_pull_images and item not in installed_docker_images.stdout
-
   become: yes
   become_user: root
+  tags:
+  - docker

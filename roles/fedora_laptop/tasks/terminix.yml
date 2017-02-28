@@ -12,6 +12,8 @@
         state: present
   become: yes
   become_user: root
+  tags:
+  - terminix
 
 # Configure Terminix
 - block:
@@ -20,6 +22,8 @@
 
   - name: load Terminix preferences
     shell: echo -e "{{ lookup('file', 'terminix/preferences') }}" | dconf load /com/gexperts/Terminix/
+  tags:
+  - terminix
 
 # Install gnome-shell extension
 # Ref: http://bernaerts.dyndns.org/linux/76-gnome/283-gnome-shell-install-extension-command-line-script
@@ -27,6 +31,8 @@
   stat:
     path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TerminixDropdown@ivkuzev@gmail.com"
   register: terminix_dropdown_extension
+  tags:
+  - terminix
 
 - block:
   - name: download gnome-shell-TerminixDropdown
@@ -52,3 +58,5 @@
     command: gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'TerminixDropdown@ivkuzev@gmail.com']"
     when: "'TerminixDropdown@ivkuzev@gmail.com' not in enabled_extensions.stdout"
   when: not terminix_dropdown_extension.stat.exists
+  tags:
+  - terminix

@@ -22,22 +22,27 @@
     with_items: "{{ atom_package_dependencies }}"
   become: yes
   become_user: root
+  tags:
+  - atom
 
-- name: gather installed Atom packages
-  command: apm ls
-  register: installed_atom_packages
-  changed_when: false
+- block:
+  - name: gather installed Atom packages
+    command: apm ls
+    register: installed_atom_packages
+    changed_when: false
 
-- name: install Atom packages
-  command: apm install {{ item }}
-  with_items: "{{ atom_packages }}"
-  when: item not in installed_atom_packages.stdout
+  - name: install Atom packages
+    command: apm install {{ item }}
+    with_items: "{{ atom_packages }}"
+    when: item not in installed_atom_packages.stdout
 
-- name: copy Atom config files
-  copy:
-    src: atom/{{ item }}
-    dest: "{{ ansible_env.HOME }}/.atom/"
-    backup: yes
-  with_items:
-  - config.cson
-  - keymap.cson
+  - name: copy Atom config files
+    copy:
+      src: atom/{{ item }}
+      dest: "{{ ansible_env.HOME }}/.atom/"
+      backup: yes
+    with_items:
+    - config.cson
+    - keymap.cson
+  tags:
+  - atom
