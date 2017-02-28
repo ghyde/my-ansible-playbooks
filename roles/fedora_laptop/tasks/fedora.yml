@@ -11,6 +11,16 @@
 
 # Gnome 3 configs
 - block:
+  - name: install packages for editing Gnome 3 settings
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - glib2
+    - dconf
+    become: yes
+    become_user: root
+
   # UI settings
   - name: enable minimize and maximize buttons
     command: gsettings set org.gnome.desktop.wm.preferences button-layout "appmenu:minimize,maximize,close"
@@ -44,5 +54,9 @@
   - name: backup current custom shortcuts
     shell: dconf dump /org/gnome/settings-daemon/plugins/media-keys/ > /tmp/media-keys.{{ ansible_date_time.epoch }}
 
+  # NOTE: Using `dconf load` requires a user to logout before shortcuts will work.
   - name: load custom shortcuts
     shell: echo -e "{{ lookup('file', 'gnome3/media-keys') }}" | dconf load /org/gnome/settings-daemon/plugins/media-keys/
+
+  - debug:
+      msg: "NOTE: You must logout before keyboard shortcuts will work."
