@@ -75,6 +75,12 @@ docker_images:
 - kalilinux/kali-linux-docker:Rolling
 - mongo:3.4
 
+################
+# Go variables #
+################
+go_packages:
+- github.com/derekparker/delve/cmd/dlv
+
 #################
 # PIP variables #
 #################

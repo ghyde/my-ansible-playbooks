@@ -1,0 +1,30 @@
+---
+- block:
+  - name: install Go programming language
+    dnf:
+      name: golang
+      state: present
+    become: yes
+    become_user: root
+
+  - name: create directory for Go packages
+    file:
+      path: "{{ ansible_user_dir }}/go"
+      state: directory
+
+  - name: set Go environment variables
+    lineinfile:
+      dest: "{{ ansible_user_dir }}/.profile"
+      state: present
+      line: "{{ item }}"
+      insertafter: EOF
+      backup: yes
+    with_items:
+    - 'export GOPATH=$HOME/go'
+    - 'export PATH=$GOPATH/bin:$PATH'
+
+  - name: install Go packages
+    shell: go get {{ item }}
+    with_items: "{{ go_packages }}"
+  tags:
+  - golang
