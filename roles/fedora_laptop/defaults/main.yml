@@ -6,7 +6,9 @@
 ####################
 fedora_installed_packages:
 - bash-completion
+- ffmpeg
 - gnome-tweak-tool
+- ImageMagick
 - irssi
 - libvirt
 - origin-clients
