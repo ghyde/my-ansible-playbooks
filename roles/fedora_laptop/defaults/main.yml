@@ -10,6 +10,7 @@ fedora_installed_packages:
 - gnome-tweak-tool
 - ImageMagick
 - irssi
+- libgnome
 - libvirt
 - origin-clients
 - python-ipython
