@@ -32,21 +32,15 @@ fedora_third_party_rpms:
 atom_packages:
 - activate-power-mode
 - autocomplete-ansible
-#- autocomplete-emojis
 - autocomplete-paths
 - autocomplete-python
 - auto-detect-indentation
 - color-picker
-- fizzy
 - git-plus
 - git-time-machine
 - keybinding-cheatsheet
 - language-ansible
-#- language-latex
-#- latex
-#- latexer
 - linter
-#- linter-ansible-linting
 - linter-ansible-syntax
 - linter-pycodestyle
 - markdown-pdf
@@ -55,16 +49,11 @@ atom_packages:
 - markdown-writer
 - merge-conflicts
 - minimap
-- monokai
 - script
 - seti-icons
-- seti-syntax
-- seti-ui
-- unity-ui
 - vim-mode
 
 atom_package_dependencies:
-#- ansible-lint
 - python2-pycodestyle
 
 #################
