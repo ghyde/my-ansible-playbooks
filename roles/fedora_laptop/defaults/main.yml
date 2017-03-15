@@ -112,6 +112,7 @@ vagrant_plugins:
 - vagrant-libvirt
 - vagrant-registration
 - vagrant-service-manager
+- vagrant-scp
 - vagrant-sshfs
 
 vagrant_plugin_dependencies:
