@@ -35,13 +35,16 @@ atom_packages:
 - autocomplete-paths
 - autocomplete-python
 - auto-detect-indentation
+- busy-signal
 - color-picker
 - git-plus
 - git-time-machine
+- intentions
 - keybinding-cheatsheet
 - language-ansible
 - linter
 - linter-ansible-syntax
+- linter-ui-default
 - linter-pycodestyle
 - markdown-pdf
 - markdown-preview-plus
