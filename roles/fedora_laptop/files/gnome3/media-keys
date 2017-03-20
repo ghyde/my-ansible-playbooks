@@ -8,5 +8,5 @@ name='Launch browser'
 
 [custom-keybindings/custom0]
 binding='<Primary><Alt>t'
-command='/usr/bin/terminix'
+command='/usr/bin/tilix'
 name='Launch terminal'

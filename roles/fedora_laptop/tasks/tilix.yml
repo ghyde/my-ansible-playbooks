@@ -1,0 +1,63 @@
+---
+# Install Tilix
+- block:
+    - name: add Tilix repo
+      get_url:
+        # The repo still uses Tilix's old name, Terminix.
+        url: https://copr.fedorainfracloud.org/coprs/heikoada/terminix/repo/fedora-25/heikoada-terminix-fedora-25.repo
+        dest: /etc/yum.repos.d/heikoada-terminix-fedora-25.repo
+
+    - name: install Tilix
+      dnf:
+        name: tilix
+        state: present
+  become: yes
+  become_user: root
+  tags:
+  - tilix
+
+# Configure Tilix
+- block:
+  - name: backup current Tilix preferences
+    shell: dconf dump /com/gexperts/Tilix/ > /tmp/tilix_preferences.{{ ansible_date_time.epoch }}
+
+  - name: load Tilix preferences
+    shell: echo -e "{{ lookup('file', 'tilix/preferences') }}" | dconf load /com/gexperts/Tilix/
+  tags:
+  - tilix
+
+# Install gnome-shell extension
+# Ref: http://bernaerts.dyndns.org/linux/76-gnome/283-gnome-shell-install-extension-command-line-script
+- name: check if Tilix Dropdown extension is installed
+  stat:
+    path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TilixDropdown@ivkuzev@gmail.com"
+  register: tilix_dropdown_extension
+  tags:
+  - tilix
+
+- block:
+  - name: download gnome-shell-TilixDropdown
+    unarchive:
+      src: https://github.com/ivoarch/gnome-shell-TilixDropdown/archive/master.zip
+      dest: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
+      remote_src: True
+
+  - name: rename output directory
+    command: mv gnome-shell-TilixDropdown-master TilixDropdown@ivkuzev@gmail.com
+    args:
+      chdir: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
+      creates: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TilixDropdown@ivkuzev@gmail.com"
+
+  - name: get enabled extensions
+    command: gsettings get org.gnome.shell enabled-extensions
+    register: enabled_extensions
+
+  - debug:
+      msg: "Current enabled extensions: {{ enabled_extensions.stdout }}"
+
+  - name: enable TilixDropdown extensions
+    command: gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'TilixDropdown@ivkuzev@gmail.com']"
+    when: "'TilixDropdown@ivkuzev@gmail.com' not in enabled_extensions.stdout"
+  when: not tilix_dropdown_extension.stat.exists
+  tags:
+  - tilix

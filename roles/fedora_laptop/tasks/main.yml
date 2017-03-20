@@ -7,4 +7,4 @@
 - include: golang.yml
 - include: libvirt.yml
 - include: vagrant.yml
-- include: terminix.yml
+- include: tilix.yml
