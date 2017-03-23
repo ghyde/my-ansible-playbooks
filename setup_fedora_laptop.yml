@@ -1,5 +1,5 @@
 ---
-# Installs and configures Fluentd on a server running Openshift
+# Configures a Fedora laptop the way I like it.
 - hosts: localhost
   connection: local
 
