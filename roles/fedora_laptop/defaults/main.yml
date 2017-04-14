@@ -69,7 +69,7 @@ docker_images:
 - alpine:3.5
 - centos:7
 - fedora:25
-- kalilinux/kali-linux-docker:Rolling
+- kalilinux/kali-linux-docker:latest
 - mongo:3.4
 
 ################
