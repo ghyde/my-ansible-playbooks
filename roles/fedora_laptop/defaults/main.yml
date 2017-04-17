@@ -17,6 +17,7 @@ fedora_installed_packages:
 - python-ipython
 - python-pudb
 - screen
+- tigervnc
 - tmux
 - unzip
 - virt-manager
