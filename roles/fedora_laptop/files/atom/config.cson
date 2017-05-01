@@ -10,14 +10,12 @@
     ]
     telemetryConsent: "limited"
   editor:
-    fontSize: 14
     showIndentGuide: true
   "exception-reporting":
     userId: "a2c07b84-577e-2e1f-6364-19a81188bf7f"
   "git-plus":
     general:
       _analyticsUserId: "7c7df9ea-c0e9-44e9-8f76-384e0f077622"
-  linter:
-    showErrorPanel: false
+  linter: {}
   welcome:
     showOnStartup: false
