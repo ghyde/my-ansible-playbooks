@@ -1,5 +1,5 @@
-[Allow {{ ansible_user }} libvirt management permissions]
-Identity=unix-user:{{ ansible_user }}
+[Allow {{ ansible_user_id }} libvirt management permissions]
+Identity=unix-user:{{ ansible_user_id }}
 Action=org.libvirt.unix.manage
 ResultAny=yes
 ResultInactive=yes
