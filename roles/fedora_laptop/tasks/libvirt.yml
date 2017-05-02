@@ -7,6 +7,7 @@
     with_items:
     - libvirt
     - libvirt-python
+    - ksm
     - python-lxml
 
   - name: allow user libvirt management permissions
@@ -14,11 +15,25 @@
       src: libvirt/libvirt.pkla.j2
       dest: /etc/polkit-1/localauthority/50-local.d/libvirt.pkla
 
-  - name: start libvirtd
+  - name: copy KSM config files
+    copy:
+      src: "ksm/{{ item.src }}"
+      dest: "{{ item.dest }}"
+      backup: yes
+    with_items:
+    - src: ksmtuned.conf
+      dest: /etc/ksmtuned.conf
+    - src: sysconfig_ksm
+      dest: /etc/sysconfig/ksm
+
+  - name: start packages
     service:
-      name: libvirtd
+      name: "{{ item }}"
       state: started
       enabled: yes
+    with_items:
+    - ksm
+    - libvirtd
 
   - name: get available pools
     virt_pool:
