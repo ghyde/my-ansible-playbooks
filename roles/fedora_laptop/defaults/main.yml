@@ -26,8 +26,8 @@ fedora_installed_packages:
 - wireshark-qt
 
 fedora_third_party_rpms:
-- https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/2.4.0/rocketchat-2.4.0.rpm
-- https://downloads.slack-edge.com/linux_releases/slack-2.4.2-0.1.fc21.x86_64.rpm
+- https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/2.7.0/rocketchat-desktop-2.7.0.rpm
+- https://downloads.slack-edge.com/linux_releases/slack-2.5.2-0.1.fc21.x86_64.rpm
 
 ##################
 # Atom variables #
