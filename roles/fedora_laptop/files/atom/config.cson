@@ -3,7 +3,9 @@
     autoToggle: false
     comboMode:
       enabled: false
-  "autocomplete-plus": {}
+  "autocomplete-plus":
+    confirmCompletion: "enter"
+    useCoreMovementCommands: false
   core:
     disabledPackages: [
       "markdown-preview-plus"

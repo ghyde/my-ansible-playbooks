@@ -1,0 +1,7 @@
+'body atom-text-editor.autocomplete-active':
+  'shift-tab': 'autocomplete-plus:move-up'
+  'tab': 'autocomplete-plus:move-down'
+  'pageup': 'autocomplete-plus:page-up'
+  'pagedown': 'autocomplete-plus:page-down'
+  'home': 'autocomplete-plus:move-to-top'
+  'end': 'autocomplete-plus:move-to-bottom'
