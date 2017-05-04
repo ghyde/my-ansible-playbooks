@@ -24,6 +24,7 @@ fedora_installed_packages:
 - vim
 - vim-X11
 - wireshark-qt
+- xsel
 
 fedora_third_party_rpms:
 - https://github.com/RocketChat/Rocket.Chat.Electron/releases/download/2.7.0/rocketchat-desktop-2.7.0.rpm
