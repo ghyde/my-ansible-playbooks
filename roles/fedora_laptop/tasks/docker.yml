@@ -1,18 +1,8 @@
 ---
 - block:
-  - name: import Docker GPG key
-    rpm_key:
-      key: https://yum.dockerproject.org/gpg
-      state: present
-
-  - name: add Docker repo
-    get_url:
-      url: https://docs.docker.com/engine/installation/linux/repo_files/fedora/docker.repo
-      dest: /etc/yum.repos.d/docker.repo
-
   - name: install Docker
     dnf:
-      name: docker-engine
+      name: docker
       state: present
 
   - name: create docker group
