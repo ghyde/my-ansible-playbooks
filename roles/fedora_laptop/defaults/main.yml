@@ -58,7 +58,7 @@ atom_packages:
 - minimap
 - script
 - seti-icons
-- vim-mode
+- vim-mode-plus
 
 atom_package_dependencies:
 - python2-pycodestyle
