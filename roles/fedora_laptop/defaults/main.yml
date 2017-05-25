@@ -33,7 +33,7 @@ fedora_third_party_rpms:
 ##################
 # Atom variables #
 ##################
-atom_packages:
+atom_installed_packages:
 - activate-power-mode
 - autocomplete-ansible
 - autocomplete-paths
@@ -59,6 +59,11 @@ atom_packages:
 - script
 - seti-icons
 - vim-mode-plus
+
+# Remove packages that may conflict with installed packages
+atom_removed_packages:
+- ex-mode
+- vim-mode
 
 atom_package_dependencies:
 - python2-pycodestyle

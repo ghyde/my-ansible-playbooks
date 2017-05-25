@@ -28,13 +28,18 @@
 - block:
   - name: gather installed Atom packages
     command: apm ls
-    register: installed_atom_packages
+    register: atom_package_list
     changed_when: false
+
+  - name: remove Atom packages
+    command: apm remove {{ item }}
+    with_items: "{{ atom_removed_packages }}"
+    when: item in atom_package_list.stdout
 
   - name: install Atom packages
     command: apm install {{ item }}
-    with_items: "{{ atom_packages }}"
-    when: item not in installed_atom_packages.stdout
+    with_items: "{{ atom_installed_packages }}"
+    when: item not in atom_package_list.stdout
 
   - name: copy Atom config files
     copy:
