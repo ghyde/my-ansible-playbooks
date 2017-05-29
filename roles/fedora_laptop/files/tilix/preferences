@@ -1,12 +1,6 @@
-[/]
-accelerators-enabled=true
-enable-wide-handle=false
-terminal-title-show-when-single=true
-terminal-title-style='small'
-theme-variant='dark'
-
 [profiles/2b7c4080-0ddd-46c5-8f23-563fd3ba789d]
 foreground-color='#F8F8F2'
+rewrap-on-resize=true
 visible-name='Default'
 dim-color-set=false
 palette=['#272822', '#F92672', '#A6E22E', '#F4BF75', '#66D9EF', '#AE81FF', '#A1EFE4', '#F8F8F2', '#75715E', '#F92672', '#A6E22E', '#F4BF75', '#66D9EF', '#AE81FF', '#A1EFE4', '#F9F8F5']
@@ -14,6 +8,18 @@ badge-color-set=false
 cursor-colors-set=false
 highlight-colors-set=false
 use-theme-colors=false
+bold-color-set=false
 terminal-bell='none'
 scrollback-unlimited=true
+terminal-title='${id}: ${title}'
 background-color='#272822'
+
+[/]
+accelerators-enabled=true
+terminal-title-style='small'
+window-state=128
+theme-variant='dark'
+new-instance-mode='new-window'
+enable-wide-handle=false
+warn-vte-config-issue=false
+terminal-title-show-when-single=true
