@@ -90,6 +90,7 @@ go_packages:
 #################
 pip_packages:
 - thefuck
+- xkcdpass
 
 pip_package_dependencies:
 - python-devel
