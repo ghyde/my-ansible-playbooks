@@ -16,6 +16,7 @@ fedora_installed_packages:
 - origin-clients
 - python-ipython
 - python-pudb
+- rubygem-asciidoctor-pdf
 - screen
 - tigervnc
 - tmux
@@ -35,6 +36,7 @@ fedora_third_party_rpms:
 ##################
 atom_installed_packages:
 - activate-power-mode
+- asciidoc-preview
 - autocomplete-ansible
 - autocomplete-paths
 - autocomplete-python
@@ -46,6 +48,7 @@ atom_installed_packages:
 - intentions
 - keybinding-cheatsheet
 - language-ansible
+- language-asciidoc
 - linter
 - linter-ansible-syntax
 - linter-ui-default
