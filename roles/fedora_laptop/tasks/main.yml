@@ -8,3 +8,4 @@
 - include: libvirt.yml
 - include: vagrant.yml
 - include: tilix.yml
+- include: openshift_origin.yml

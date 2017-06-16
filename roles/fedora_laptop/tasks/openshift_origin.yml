@@ -1,0 +1,21 @@
+---
+# Install dependancies for building OpenShift Origin
+- block:
+  - name: install packages for building RPMs
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - createrepo
+    - tito
+    become: yes
+    become_user: root
+
+  - include: golang.yml
+
+  - name: install packages for building images
+    shell: go get {{ item }}
+    with_items:
+    - github.com/openshift/imagebuilder/cmd/imagebuilder
+  tags:
+  - origin
