@@ -5,6 +5,12 @@
       name: "{{ item }}"
       state: present
     with_items: "{{ fedora_installed_packages }}"
+
+  - name: disable sshd
+    systemd:
+      name: sshd
+      state: stopped
+      enabled: no
   become: yes
   become_user: root
   tags:
