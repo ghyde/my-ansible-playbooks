@@ -39,7 +39,7 @@ atom_installed_packages:
 - asciidoc-preview
 - autocomplete-ansible
 - autocomplete-paths
-- autocomplete-python
+- autocomplete-python-jedi
 - auto-detect-indentation
 - busy-signal
 - color-picker
@@ -58,14 +58,16 @@ atom_installed_packages:
 - markdown-scroll-sync
 - markdown-writer
 - merge-conflicts
-- minimap
+- minimap-plus
 - script
 - seti-icons
 - vim-mode-plus
 
 # Remove packages that may conflict with installed packages
 atom_removed_packages:
+- autocomplete-python
 - ex-mode
+- minimap
 - vim-mode
 
 atom_package_dependencies:

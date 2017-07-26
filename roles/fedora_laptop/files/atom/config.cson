@@ -6,6 +6,9 @@
   "autocomplete-plus":
     confirmCompletion: "enter"
     useCoreMovementCommands: false
+  "autocomplete-python-jedi":
+    fuzzyMatcher: false
+    useSnippets: "required"
   core:
     disabledPackages: [
       "markdown-preview-plus"
