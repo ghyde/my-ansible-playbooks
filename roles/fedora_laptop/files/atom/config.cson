@@ -10,15 +10,23 @@
     fuzzyMatcher: false
     useSnippets: "required"
   core:
+    audioBeep: false
+    automaticallyUpdate: false
+    closeDeletedFileTabs: true
     disabledPackages: [
       "exception-reporting"
       "markdown-preview"
     ]
     telemetryConsent: "limited"
   editor:
+    invisibles: {}
     showIndentGuide: true
   "git-plus":
+    experimental:
+      stageFilesBeta: false
     general: {}
   linter: {}
+  "linter-ui-default":
+    panelHeight: 69
   welcome:
     showOnStartup: false
