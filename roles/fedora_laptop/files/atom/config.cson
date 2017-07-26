@@ -11,7 +11,7 @@
     useSnippets: "required"
   core:
     disabledPackages: [
-      "markdown-preview-plus"
+      "markdown-preview"
     ]
     telemetryConsent: "limited"
   editor:
