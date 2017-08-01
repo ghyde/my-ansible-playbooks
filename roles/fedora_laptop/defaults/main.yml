@@ -6,6 +6,7 @@
 ####################
 fedora_installed_packages:
 - bash-completion
+- buildah
 #- ffmpeg
 - gnome-tweak-tool
 - ImageMagick
