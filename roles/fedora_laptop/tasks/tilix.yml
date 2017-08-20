@@ -5,7 +5,7 @@
       get_url:
         # The repo still uses Tilix's old name, Terminix.
         url: https://copr.fedorainfracloud.org/coprs/heikoada/terminix/repo/fedora-25/heikoada-terminix-fedora-25.repo
-        dest: /etc/yum.repos.d/heikoada-terminix-fedora-25.repo
+        dest: /etc/yum.repos.d/heikoada-tilix.repo
 
     - name: install Tilix
       dnf:
