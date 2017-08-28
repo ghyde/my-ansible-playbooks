@@ -117,12 +117,11 @@ dnsmasq_listen_interface: wlp4s0
 
 vagrant_plugins:
 - landrush
-- ruby-libvirt
 - vagrant-hostmanager
 - vagrant-libvirt
 - vagrant-registration
-- vagrant-service-manager
 - vagrant-scp
+- vagrant-service-manager
 - vagrant-sshfs
 
 vagrant_plugin_dependencies:
@@ -133,6 +132,7 @@ vagrant_plugin_dependencies:
 - libvirt-devel
 - qemu
 - ruby-devel
+- rubygem-ruby-libvirt
 - zlib-devel
 
 # vagrant_boxes:

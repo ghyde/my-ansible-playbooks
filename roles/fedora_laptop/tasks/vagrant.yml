@@ -2,12 +2,14 @@
 - block:
   - name: install Vagrant
     dnf:
-      name: vagrant
+      # TODO: Replace with "vagrant" after Fedora repo is updated.
+      # Vagrant 1.9.1 is not compatable with landrush.
+      name: "https://releases.hashicorp.com/vagrant/1.9.8/vagrant_1.9.8_x86_64.rpm"
       state: present
     become: yes
     become_user: root
 
-  - name: gather installed Vagrent plugins
+  - name: gather installed Vagrant plugins
     command: vagrant plugin list
     register: installed_vagrant_plugins
     changed_when: false
