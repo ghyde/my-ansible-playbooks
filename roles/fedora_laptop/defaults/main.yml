@@ -16,6 +16,7 @@ fedora_installed_packages:
 - libvirt
 - nextcloud-client
 - nmap
+- opensc
 - origin-clients
 - python-ipython
 - python-pudb
