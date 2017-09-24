@@ -14,6 +14,7 @@ fedora_installed_packages:
 - irssi
 - libgnome
 - libvirt
+- masscan
 - nextcloud-client
 - nmap
 - opensc
