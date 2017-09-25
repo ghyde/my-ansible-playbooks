@@ -12,6 +12,7 @@ fedora_installed_packages:
 - gnome-tweak-tool
 - ImageMagick
 - irssi
+- jq
 - libgnome
 - libvirt
 - masscan
@@ -23,6 +24,7 @@ fedora_installed_packages:
 - python-pudb
 - rubygem-asciidoctor-pdf
 - screen
+- skopeo
 - tigervnc
 - tmux
 - unzip
