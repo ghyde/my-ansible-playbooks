@@ -5,6 +5,7 @@
 # Fedora variables #
 ####################
 fedora_installed_packages:
+- asciinema
 - bash-completion
 - buildah
 - dnf-plugin-system-upgrade
