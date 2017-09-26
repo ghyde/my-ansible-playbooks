@@ -34,6 +34,7 @@
     with_items:
     - kernel-devel
     - sysdig
+    - falco
   become: yes
   become_user: root
   tags:
