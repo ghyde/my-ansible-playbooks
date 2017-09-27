@@ -35,6 +35,7 @@
     - kernel-devel
     - sysdig
     - falco
+    - https://download.sysdig.com/stable/sysdig-inspect/sysdig-inspect-latest.x86_64.rpm
   become: yes
   become_user: root
   tags:
