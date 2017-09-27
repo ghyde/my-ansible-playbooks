@@ -9,7 +9,6 @@ fedora_installed_packages:
 - bash-completion
 - buildah
 - dnf-plugin-system-upgrade
-#- ffmpeg
 - gnome-tweak-tool
 - ImageMagick
 - irssi

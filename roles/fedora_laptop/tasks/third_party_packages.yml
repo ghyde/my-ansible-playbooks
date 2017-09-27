@@ -56,6 +56,33 @@
   tags:
   - spotify
 
+# Install ffmpeg
+- block:
+  - name: install rpmfusion repos
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-26.noarch.rpm
+    #- https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-26.noarch.rpm
+
+  - name: install ffmpeg
+    dnf:
+      name: ffmpeg
+      state: present
+
+  - name: install GStreamer packages
+    dnf:
+      name: "{{ item }}"
+      state: present
+    with_items:
+    - gstreamer1-libav
+  become: yes
+  become_user: root
+  tags:
+  - ffmpeg
+  - rpmfusion
+
 # Install third party rpms
 - block:
   - name: install third party RPMs
