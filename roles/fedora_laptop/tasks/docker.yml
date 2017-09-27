@@ -1,9 +1,12 @@
 ---
 - block:
-  - name: install Docker
+  - name: install Docker packages
     dnf:
-      name: docker
+      name: "{{ item }}"
       state: present
+    with_items:
+      - docker
+      - docker-compose
 
   - name: create docker group
     group:
