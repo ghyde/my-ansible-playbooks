@@ -8,6 +8,7 @@ fedora_installed_packages:
 - asciinema
 - bash-completion
 - buildah
+- ddrescue
 - dnf-plugin-system-upgrade
 - gnome-tweak-tool
 - ImageMagick
