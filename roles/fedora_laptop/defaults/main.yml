@@ -6,6 +6,7 @@
 ####################
 fedora_installed_packages:
 - asciinema
+- atomic
 - bash-completion
 - buildah
 - ddrescue
@@ -21,10 +22,13 @@ fedora_installed_packages:
 - nextcloud-client
 - nmap
 - opensc
+- openscap-containers
+- openscap-utils
 - origin-clients
 - python-ipython
 - python-pudb
 - rubygem-asciidoctor-pdf
+- scap-security-guide
 - screen
 - skopeo
 - tigervnc
