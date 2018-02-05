@@ -28,5 +28,6 @@
   linter: {}
   "linter-ui-default":
     panelHeight: 69
+  "vim-mode-plus": {}
   welcome:
     showOnStartup: false
