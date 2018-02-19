@@ -52,6 +52,7 @@ atom_installed_packages:
 - activate-power-mode
 - asciidoc-preview
 - autocomplete-ansible
+- autocomplete-asciidoc
 - autocomplete-paths
 - autocomplete-python-jedi
 - auto-detect-indentation
