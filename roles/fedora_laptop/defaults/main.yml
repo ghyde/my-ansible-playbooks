@@ -34,9 +34,10 @@ fedora_installed_packages:
 - tigervnc
 - tmux
 - unzip
-- virt-manager
 - vim
 - vim-X11
+- virt-manager
+- VirtualBox
 - wireshark-qt
 - xsel
 
