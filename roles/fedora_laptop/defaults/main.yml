@@ -68,7 +68,6 @@ atom_installed_packages:
 - linter-pycodestyle
 - markdown-pdf
 - markdown-preview-plus
-- markdown-scroll-sync
 - markdown-writer
 - merge-conflicts
 - minimap-plus
