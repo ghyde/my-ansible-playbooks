@@ -27,6 +27,9 @@ fedora_installed_packages:
 - origin-clients
 - python-ipython
 - python-pudb
+- python2-heatclient
+- python2-openstackclient
+- python2-shade
 - rubygem-asciidoctor-pdf
 - scap-security-guide
 - screen
