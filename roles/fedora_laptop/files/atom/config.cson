@@ -3,6 +3,9 @@
     autoToggle: false
     comboMode:
       enabled: false
+    plugins:
+      playAudio: true
+      screenShake: true
   "autocomplete-plus":
     confirmCompletion: "enter"
     useCoreMovementCommands: false
@@ -26,8 +29,8 @@
       stageFilesBeta: false
     general: {}
   linter: {}
-  "linter-ui-default":
-    panelHeight: 69
+  "linter-ui-default": {}
+  "tree-view": {}
   "vim-mode-plus": {}
   welcome:
     showOnStartup: false
