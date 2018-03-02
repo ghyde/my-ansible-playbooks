@@ -25,6 +25,7 @@ fedora_installed_packages:
 - openscap-containers
 - openscap-utils
 - origin-clients
+- podman
 - python-ipython
 - python-pudb
 - python2-heatclient
