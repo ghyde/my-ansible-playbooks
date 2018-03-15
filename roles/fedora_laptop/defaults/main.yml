@@ -42,7 +42,6 @@ fedora_installed_packages:
 - vim-X11
 - virt-manager
 - VirtualBox
-- wireshark-qt
 - xsel
 
 fedora_third_party_rpms:

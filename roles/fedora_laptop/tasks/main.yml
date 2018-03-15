@@ -4,6 +4,7 @@
 - include: third_party_packages.yml
 - include: atom.yml
 - include: docker.yml
+- include: wireshark.yml
 - include: golang.yml
 - include: libvirt.yml
 - include: vagrant.yml
