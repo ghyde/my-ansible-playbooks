@@ -1,16 +1,16 @@
 ---
 # Install Tilix
 - block:
-    - name: add Tilix repo
-      get_url:
-        # The repo still uses Tilix's old name, Terminix.
-        url: https://copr.fedorainfracloud.org/coprs/heikoada/terminix/repo/fedora-25/heikoada-terminix-fedora-25.repo
-        dest: /etc/yum.repos.d/heikoada-tilix.repo
+  # For Fedora 26 and newer, Tilix is included in the default repository
+  - name: remove heikoada repo
+    file:
+      path: /etc/yum.repos.d/heikoada-tilix.repo
+      state: absent
 
-    - name: install Tilix
-      dnf:
-        name: tilix
-        state: present
+  - name: install Tilix
+    dnf:
+      name: tilix
+      state: present
   become: yes
   become_user: root
   tags:
