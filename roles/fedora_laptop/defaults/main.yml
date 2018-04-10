@@ -88,6 +88,8 @@ atom_removed_packages:
 - vim-mode
 
 atom_package_dependencies:
+- python2-boto3
+- python2-botocore
 - python2-pycodestyle
 
 #################

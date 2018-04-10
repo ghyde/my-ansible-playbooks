@@ -35,6 +35,7 @@
     command: apm remove {{ item }}
     with_items: "{{ atom_removed_packages }}"
     when: item in atom_package_list.stdout
+    failed_when: false
 
   - name: install Atom packages
     command: apm install {{ item }}
