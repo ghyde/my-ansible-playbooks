@@ -36,6 +36,11 @@
   - tilix
 
 - block:
+  - name: create extentions directory
+    file:
+      path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions"
+      state: directory
+
   - name: download gnome-shell-TilixDropdown
     unarchive:
       src: https://github.com/ivoarch/gnome-shell-TilixDropdown/archive/master.zip
