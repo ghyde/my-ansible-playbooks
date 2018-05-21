@@ -12,6 +12,7 @@ fedora_installed_packages:
 - ddrescue
 - dnf-plugin-system-upgrade
 - gnome-tweak-tool
+- htop
 - ImageMagick
 - irssi
 - jq
