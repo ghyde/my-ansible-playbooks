@@ -26,43 +26,44 @@
   tags:
   - tilix
 
-# Install gnome-shell extension
-# Ref: http://bernaerts.dyndns.org/linux/76-gnome/283-gnome-shell-install-extension-command-line-script
-- name: check if Tilix Dropdown extension is installed
-  stat:
-    path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TilixDropdown@ivkuzev@gmail.com"
-  register: tilix_dropdown_extension
-  tags:
-  - tilix
-
-- block:
-  - name: create extentions directory
-    file:
-      path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions"
-      state: directory
-
-  - name: download gnome-shell-TilixDropdown
-    unarchive:
-      src: https://github.com/ivoarch/gnome-shell-TilixDropdown/archive/master.zip
-      dest: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
-      remote_src: True
-
-  - name: rename output directory
-    command: mv gnome-shell-TilixDropdown-master TilixDropdown@ivkuzev@gmail.com
-    args:
-      chdir: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
-      creates: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TilixDropdown@ivkuzev@gmail.com"
-
-  - name: get enabled extensions
-    command: gsettings get org.gnome.shell enabled-extensions
-    register: enabled_extensions
-
-  - debug:
-      msg: "Current enabled extensions: {{ enabled_extensions.stdout }}"
-
-  - name: enable TilixDropdown extensions
-    command: gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'TilixDropdown@ivkuzev@gmail.com']"
-    when: "'TilixDropdown@ivkuzev@gmail.com' not in enabled_extensions.stdout"
-  when: not tilix_dropdown_extension.stat.exists
-  tags:
-  - tilix
+# TODO: The Tilix Dropdown extension is currently not supported on Fedora 28
+# # Install gnome-shell extension
+# # Ref: http://bernaerts.dyndns.org/linux/76-gnome/283-gnome-shell-install-extension-command-line-script
+# - name: check if Tilix Dropdown extension is installed
+#   stat:
+#     path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TilixDropdown@ivkuzev@gmail.com"
+#   register: tilix_dropdown_extension
+#   tags:
+#   - tilix
+#
+# - block:
+#   - name: create extentions directory
+#     file:
+#       path: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions"
+#       state: directory
+#
+#   - name: download gnome-shell-TilixDropdown
+#     unarchive:
+#       src: https://github.com/ivoarch/gnome-shell-TilixDropdown/archive/master.zip
+#       dest: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
+#       remote_src: True
+#
+#   - name: rename output directory
+#     command: mv gnome-shell-TilixDropdown-master TilixDropdown@ivkuzev@gmail.com
+#     args:
+#       chdir: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/"
+#       creates: "{{ ansible_user_dir }}/.local/share/gnome-shell/extensions/TilixDropdown@ivkuzev@gmail.com"
+#
+#   - name: get enabled extensions
+#     command: gsettings get org.gnome.shell enabled-extensions
+#     register: enabled_extensions
+#
+#   - debug:
+#       msg: "Current enabled extensions: {{ enabled_extensions.stdout }}"
+#
+#   - name: enable TilixDropdown extensions
+#     command: gsettings set org.gnome.shell enabled-extensions "['background-logo@fedorahosted.org', 'TilixDropdown@ivkuzev@gmail.com']"
+#     when: "'TilixDropdown@ivkuzev@gmail.com' not in enabled_extensions.stdout"
+#   when: not tilix_dropdown_extension.stat.exists
+#   tags:
+#   - tilix
