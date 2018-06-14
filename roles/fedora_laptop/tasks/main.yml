@@ -10,3 +10,4 @@
 - include: vagrant.yml
 - include: tilix.yml
 - include: openshift_origin.yml
+- include: openstack.yml

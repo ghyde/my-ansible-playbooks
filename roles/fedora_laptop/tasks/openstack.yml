@@ -1,0 +1,31 @@
+---
+- block:
+  - name: Install OpenStack client
+    dnf:
+      name: python2-{{ item }}client
+      state: present
+    become: yes
+    become_user: root
+    with_items:
+      - barbican
+      - ceilometer
+      - cinder
+      # - cloudkitty
+      - designate
+      - fuel
+      - glance
+      - gnocchi
+      - heat
+      - magnum
+      - manila
+      - mistral
+      - monasca
+      - murano
+      - neutron
+      - nova
+      - sahara
+      - senlin
+      - swift
+      - trove
+  tags:
+  - openstack
