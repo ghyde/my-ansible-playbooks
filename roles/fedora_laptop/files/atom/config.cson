@@ -24,6 +24,8 @@
   editor:
     invisibles: {}
     showIndentGuide: true
+    softWrap: false
+    softWrapAtPreferredLineLength: false
   "git-plus":
     experimental:
       stageFilesBeta: false
@@ -34,3 +36,19 @@
   "vim-mode-plus": {}
   welcome:
     showOnStartup: false
+".asciidoc.source":
+  editor:
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+".md.text":
+  editor:
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+".gfm.source":
+  editor:
+    softWrap: true
+    softWrapAtPreferredLineLength: true
+".plain.text":
+  editor:
+    softWrap: true
+    softWrapAtPreferredLineLength: true
