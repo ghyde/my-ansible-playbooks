@@ -8,6 +8,7 @@ fedora_installed_packages:
 - asciinema
 - atomic
 - bash-completion
+- bcc-tools
 - buildah
 - ddrescue
 - dnf-plugin-system-upgrade
