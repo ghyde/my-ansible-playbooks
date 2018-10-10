@@ -33,6 +33,7 @@ fedora_installed_packages:
 - python2-heatclient
 - python2-openstackclient
 - python2-shade
+- remmina
 - rubygem-asciidoctor-pdf
 - scap-security-guide
 - screen
