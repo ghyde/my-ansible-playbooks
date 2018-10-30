@@ -23,6 +23,7 @@ fedora_installed_packages:
 - masscan
 - nextcloud-client
 - nmap
+- no-more-secrets
 - opensc
 - openscap-containers
 - openscap-utils
