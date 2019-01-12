@@ -101,11 +101,10 @@ atom_package_dependencies:
 #################
 docker_pull_images: yes
 docker_images:
-- alpine:3.5
 - centos:7
-- fedora:25
+- fedora:29
 - kalilinux/kali-linux-docker:latest
-- mongo:3.4
+- registry.access.redhat.com/rhel7:7.6
 
 ################
 # Go variables #
