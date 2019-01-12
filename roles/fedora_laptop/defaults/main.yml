@@ -20,6 +20,7 @@ fedora_installed_packages:
 - kompose
 - libgnome
 - libvirt
+- livecd-tools
 - masscan
 - nextcloud-client
 - nmap
