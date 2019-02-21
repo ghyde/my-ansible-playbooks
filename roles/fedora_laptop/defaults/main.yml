@@ -11,6 +11,7 @@ fedora_installed_packages:
 - bcc-tools
 - buildah
 - ddrescue
+- dep
 - dnf-plugin-system-upgrade
 - gnome-tweak-tool
 - htop
