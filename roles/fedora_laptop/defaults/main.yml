@@ -83,6 +83,7 @@ atom_installed_packages:
 - markdown-writer
 - merge-conflicts
 - minimap-plus
+- python-black
 - script
 - seti-icons
 - vim-mode-plus
@@ -98,6 +99,7 @@ atom_package_dependencies:
 - python2-boto3
 - python2-botocore
 - python2-pycodestyle
+- python3-black
 
 #################
 # Docker images #
