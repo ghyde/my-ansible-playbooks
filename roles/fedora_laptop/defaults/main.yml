@@ -24,6 +24,7 @@ fedora_installed_packages:
 - libvirt
 - livecd-tools
 - masscan
+- NetworkManager-openconnect-gnome
 - nextcloud-client
 - nmap
 - no-more-secrets
