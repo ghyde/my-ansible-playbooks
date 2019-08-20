@@ -6,6 +6,7 @@
     plugins:
       playAudio: true
       screenShake: true
+  "asciidoc-preview": {}
   "autocomplete-plus":
     confirmCompletion: "enter"
     useCoreMovementCommands: false
@@ -22,6 +23,7 @@
     ]
     telemetryConsent: "limited"
   editor:
+    fontSize: 19
     invisibles: {}
     showIndentGuide: true
     softWrap: false
@@ -40,11 +42,11 @@
   editor:
     softWrap: true
     softWrapAtPreferredLineLength: true
-".md.text":
+".gfm.source":
   editor:
     softWrap: true
     softWrapAtPreferredLineLength: true
-".gfm.source":
+".md.text":
   editor:
     softWrap: true
     softWrapAtPreferredLineLength: true
